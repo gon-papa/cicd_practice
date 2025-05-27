@@ -11,6 +11,9 @@ jobs:
         working-directory: app/app
     runs-on: ubuntu-latest
     steps:
+      - name: pwd
+        run: pwd
+    
       - name: Check Out Code # コードの取得
         uses: actions/checkout@v4
 

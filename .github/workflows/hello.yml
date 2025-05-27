@@ -8,7 +8,7 @@ jobs:
   build-and-test:
     defaults:
       run:
-        working-directory: app/app
+        working-directory: /app/app
     runs-on: ubuntu-latest
     steps:
       - name: pwd

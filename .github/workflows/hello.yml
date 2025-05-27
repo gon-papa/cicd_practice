@@ -1,5 +1,4 @@
-name: hello world
-
+name: API Deploy Pipeline
 on: push
 
 jobs:

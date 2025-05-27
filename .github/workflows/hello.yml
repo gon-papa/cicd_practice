@@ -6,6 +6,9 @@ on:
 
 jobs:
   build-and-test:
+    defaults:
+      run:
+        working-directory: app/app
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Code # コードの取得

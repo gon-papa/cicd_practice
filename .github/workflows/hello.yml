@@ -6,16 +6,16 @@ on: push
 
 jobs:
   build-and-test:
+    defaults:
+      run:
+        working-directory: /cicd_practice/app
     runs-on: ubuntu-latest
     steps:
-      - name: pwd
-        run: pwd
-    
-      - name: ls
-        run: ls -a
-    
       - name: Check Out Code # コードの取得
         uses: actions/checkout@v4
+
+      - name: pwd
+        run: pwd
 
       - name: SetUp Go WithCache # Golangのセットアップ(ランナーのGoはバージョンが合わないため基本使わない)
         uses: actions/setup-go@v5

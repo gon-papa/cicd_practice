@@ -1,5 +1,8 @@
 name: API Deploy Pipeline
-on: push
+on:
+    push:
+        paths:
+            - 'app/**'
 
 jobs:
   say-hello:

@@ -17,7 +17,7 @@ func TestHelloHandler(t *testing.T) {
 		t.Errorf("unexpected status code: got %v, want %v", status, http.StatusOK)
 	}
 
-	expected := "Hello World!!"
+	expected := "Hello World"
 	if !strings.Contains(rr.Body.String(), expected) {
 		t.Errorf("unexpected body: got %v, want to contain %v", rr.Body.String(), expected)
 	}

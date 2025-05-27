@@ -1,8 +1,8 @@
 name: API Deploy Pipeline
-on:
-  push:
-    paths:
-      - 'app/**' # app配下が変更された時のみ動くように設定
+on: push
+  # push:
+  #   paths:
+  #     - 'app/**' # app配下が変更された時のみ動くように設定
 
 jobs:
   build-and-test:

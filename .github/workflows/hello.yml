@@ -46,7 +46,7 @@ jobs:
         run: go test ./... -v
 
       - name: Image Build # イメージをビルドして仮のタグを設置
-        run: docker image build -t temp_api_image:latest .
+        run: docker image build -t temp_api_image:latest ./app
      
       - name: Configure AWS credentials # OIDCを利用して認証情報を取得する
         uses: aws-actions/configure-aws-credentials@v4

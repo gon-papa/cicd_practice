@@ -2,7 +2,7 @@
 IMAGE_NAME=my-go-dev
 
 # ポート番号
-PORT=8080
+PORT=80
 
 # Docker イメージをビルド
 build:
@@ -10,7 +10,7 @@ build:
 
 # コンテナを起動（Air + ホットリロード）
 run:
-	docker run --rm -p $(PORT):8080 -v $(CURDIR):/app $(IMAGE_NAME)
+	docker run --rm -p $(PORT):80 -v $(CURDIR):/app $(IMAGE_NAME)
 
 # イメージの削除
 clean:

@@ -13,7 +13,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", helloHandler)
-	port := "8080"
+	port := "80"
 	log.Printf("cpi-fetcher is running on port %s...\n", port)
 
 	log.Fatal(http.ListenAndServe("0.0.0.0:"+port, nil))

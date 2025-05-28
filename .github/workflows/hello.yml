@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: api-image-uri
-          path: api-image-uri.txt # usesではworking-directoryが効かないため、PJルートから指定する必要がある
+          path: app/api-image-uri.txt # usesではworking-directoryが効かないため、PJルートから指定する必要がある
   
   deploy:
     defaults:
@@ -94,7 +94,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: api-image-uri
-          path: artifacts # artifactsディレクトリに保存する
+          path: app/artifacts # artifactsディレクトリに保存する
 
       - name: Define the image URI # imageのURIをGITHUB環境変数に登録
         run: |

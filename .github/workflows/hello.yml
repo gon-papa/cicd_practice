@@ -18,7 +18,7 @@ env:
   ECR_REPOSITORY: my-app
   ECS_SERVICE: xxxservice
   ECS_CLUSTER: xxxcluster
-  ECS_TASK_DEFINITION: cicd_practice/.aws/task-def-api.json
+  ECS_TASK_DEFINITION: ../.aws/task-def-api.json
 
 jobs:
   build-and-test:

@@ -2,7 +2,23 @@ name: API Deploy Pipeline
 on:
   push:
     paths:
+      - .github/workflows/**
       - 'app/**' # app配下が変更された時のみ動くように設定
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }} # 同じワークフローと同じブランチが並列で実行される場合
+  cancel-in-progress: true
+
+permissions: # OIDCで使用する権限をAction内で許可する
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ap-northeast-1
+  ECR_REPOSITORY: my-app
+  ECS_SERVICE: xxxservice
+  ECS_CLUSTER: xxxcluster
+  ECS_TASK_DEFINITION: xxxx # まだ使用しない
 
 jobs:
   build-and-test:
@@ -28,4 +44,23 @@ jobs:
 
       - name: Run tests
         run: go test ./... -v
+
+      - name: Image Build # イメージをビルドして仮のタグを設置
+        run: docker image build -t temp_api_image:latest .
      
+      - name: Configure AWS credentials # OIDCを利用して認証情報を取得する
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }} # 秘匿情報のためシークレットを活用
+          
+      - name: Login to Amazon ECR
+        id: login-ecr # この後のステップでログイン時に取得したレジストリ情報を得るためにidを付与
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Push the image to Amazon ECR # イメージのタグを書き換えとECRのイメージpushコマンドを実行してくれるアクション
+        env:
+            ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          docker image tag temp_api_image:latest $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
+          docker image push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}

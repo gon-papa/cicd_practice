@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: api-image-uri
-          path: app/api-image-uri.txt # usesではworking-directoryが効かないため、PJルートから指定する必要がある
+          path: api-image-uri.txt # usesではworking-directoryが効かないため、PJルートから指定する必要がある
   
   deploy:
     defaults:

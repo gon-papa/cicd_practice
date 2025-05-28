@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: api-image-uri
-          path: cicd_practice/app/api-image-uri.txt # usesではworking-directoryが効かないため、PJルートから指定する必要がある
+          path: app/api-image-uri.txt # usesではworking-directoryが効かないため、PJルートから指定する必要がある
   
   deploy:
     defaults:
@@ -104,14 +104,14 @@ jobs:
         id: render-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-difinition: ${{ env.ECS_TASK_DEFINITION }}
-          container-name: app
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: my-api
           image: ${{ env.API_IMAGE_URI }}
 
       - name: Deploy ECS task
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
-          task-difinition: ${{ steps.render-task-def.outputs.task-definition }}
+          task-definition: ${{ steps.render-task-def.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true

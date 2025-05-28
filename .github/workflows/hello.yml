@@ -115,5 +115,5 @@ jobs:
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
-          application-name: my-app-code-deploy
-          deployment-group: my-code-deploy-group
+          codedeploy-application: my-app-code-deploy
+          codedeploy-deployment-group: my-code-deploy-group

@@ -114,7 +114,6 @@ jobs:
           task-definition: ${{ steps.render-task-def.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
           codedeploy-application: my-app-code-deploy
           codedeploy-deployment-group: my-code-deploy-group
           codedeploy-appspec: .aws/appspec.yml

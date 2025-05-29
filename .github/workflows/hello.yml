@@ -117,3 +117,4 @@ jobs:
           wait-for-service-stability: true
           codedeploy-application: my-app-code-deploy
           codedeploy-deployment-group: my-code-deploy-group
+          codedeploy-appspec: .aws/appspec.yml
